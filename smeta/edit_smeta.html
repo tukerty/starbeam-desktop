@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<noindex>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <title>Редактор позиций</title>
+</head>
+<body>
+<div id="header1"><a href="http://starbeam.ru/smeta/"><div class="page-name menu-el">СТАРБИМ СМЕТА</div></a>
+<div class="header-menu">
+    <a href="add_to_smeta.html"><div class="menu-el">Добавить в смету</div></a>
+    <a href="edit_smeta.html"><div class="menu-el">Изменить позиции в смете</div></a>
+    <a href="edit_category.html"><div class="menu-el">Изменение категорий</div></a>
+</div></div>
+<div id="content">
+
+    <div class="container edit_smeta_cont">
+        <div class="qcont0">
+            <div class="qcont01">
+                <span class="edit_id">ID</span>
+            </div>
+            <div class="qcont1">
+                Пр-ет
+            </div>
+            <div class="qcont2"><div type="text" class="qcont21 name">Название</div>
+                <div type="text" class="qcont22 descr">Описание</div></div>
+            <div class="qcont3">Цена</div>
+        </div>
+        <?php
+include('db.php');
+$result= mysqli_query($cnt,"SELECT * FROM categories ORDER BY cat_prio");
+while($row=mysqli_fetch_array($result))
+{?>
+        <div class="cont cont_design">
+            <div class="qcat_name"><?php echo $row['cat_name'];?></div>
+            <?php
+            $result1= mysqli_query($cnt,"SELECT * FROM smeta WHERE category='$row[cat_id]' ORDER BY prio");
+            while($row1=mysqli_fetch_array($result1))
+{?>
+            <div class="cont0">
+                <div class="cont01">
+                    <span class="edit_id"><?php echo $row1['id'];?></span>
+                </div>
+                <div class="cont1">
+                    <input type="text" class="prio" value="<?php echo $row1['prio'];?>">
+                </div>
+                <div class="cont2"><textarea type="text" class="cont21 name"><?php echo $row1['name'];?></textarea>
+                    <textarea type="text" class="cont22 descr"><?php echo $row1['descr'];?></textarea></div>
+                <div class="cont3"><input type="text" class="cont31 cost" value="<?php echo $row1['cost'];?>"> руб.</div>
+            </div>
+            <?php } ?>
+        </div>
+        <?php } ?>
+        <button id="save_edit">Сохранить</button>
+    </div>
+</div>
+
+</body>
+</html>
+</noindex>
