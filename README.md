@@ -60,7 +60,7 @@ This software uses code from several open source packages.
 
 ## Related
 
-- [Starbeam Desktop](https://github.com/tukerty/starbeam-desktop/)
+- [Starbeam Mobile](https://github.com/tukerty/starbeam-mobile/)
 
 ## License
 
